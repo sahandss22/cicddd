@@ -1,25 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Hello World</h1>
-</body>
-</html>
-:100:
-Click to react
-:thumbsdown:
-Click to react
-:thumbsup:
-Click to react
-Add Reaction
-Reply
-Forward
-More
-[3:31 PM]Friday, May 1, 2026 3:31 PM
 pipeline {
     agent any
 
@@ -30,7 +8,7 @@ pipeline {
     stages {
         stage('Clone Repo') {
             steps {
-                git branch: 'main', url: 'https://github.com/sahandss22/cicdas.git'
+                git branch: 'main', url: 'https://github.com/sahandss22/cicddd.git'
             }
         }
 
