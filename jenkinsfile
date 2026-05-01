@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Hello World</h1>
+</body>
+</html>
+:100:
+Click to react
+:thumbsdown:
+Click to react
+:thumbsup:
+Click to react
+Add Reaction
+Reply
+Forward
+More
+[3:31 PM]Friday, May 1, 2026 3:31 PM
+pipeline {
+    agent any
+
+    environment {
+        IMAGE_NAME = "sahandsarkawt/php-app"
+    }
+
+    stages {
+        stage('Clone Repo') {
+            steps {
+                git branch: 'main', url: 'https://github.com/sahandss22/cicdas.git'
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                bat "docker build -t %IMAGE_NAME%:latest ."
+            }
+        }
+
+        stage('Login to Docker Hub') {
+            steps {
+                withCredentials([usernamePassword(
+                    credentialsId: 'dockerhub-name',
+                    usernameVariable: 'DOCKER_USER',
+                    passwordVariable: 'DOCKER_PASS'
+                )]) {
+                    bat '''
+                    docker login -u %DOCKER_USER% -p %DOCKER_PASS%
+                    '''
+                }
+            }
+        }
+
+        stage('Push Image') {
+            steps {
+                bat "docker push %IMAGE_NAME%:latest"
+            }
+        }
+    }
+}
